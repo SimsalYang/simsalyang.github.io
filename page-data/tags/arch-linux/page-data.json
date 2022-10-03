@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
+    "path": "/tags/arch-linux",
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/the-experence-of-use-arch-linux/","title":"Arch Linux 使用体验","date":"2022-03-26","excerpt":"为什么要用 Arch Linux？ 要问为什么要用  Arch Linux ，首先要问为什么要用 Linux。 如果在 Google 搜索 为什么用 Linux ，会得到五花八门的答案。 我为什么要用 Linux？回想第一次安装 Linux…","timeToRead":1,"description":null,"tags":[{"name":"Linux","slug":"linux"},{"name":"Arch Linux","slug":"arch-linux"},{"name":"blog","slug":"blog"}]}]}},"pageContext":{"slug":"arch-linux","name":"Arch Linux","formatString":"YYYY-MM-DD"}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

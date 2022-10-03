@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
+    "path": "/tags/android",
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/remove-x-sign","title":"去除 Android 手机 Wi-Fi 信号图标的叉号","date":"2022-04-02","excerpt":"原因 安装第三方 ROM（如 LineageOS）后，接入网络时默认通过谷歌的验证服务器检测，但大陆无法访问，因此出现感叹号或叉号，实际是可以访问网络。 准备工作 adb…","timeToRead":1,"description":null,"tags":[{"name":"Android","slug":"android"},{"name":"adb","slug":"adb"}]}]}},"pageContext":{"slug":"android","name":"Android","formatString":"YYYY-MM-DD"}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

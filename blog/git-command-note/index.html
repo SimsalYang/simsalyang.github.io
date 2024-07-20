@@ -1,0 +1,386 @@
+<!DOCTYPE html><html lang="en" class="dark"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.11.0"><!-- Font preloads --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://simsalyang.github.io/blog/git-command-note/"><!-- Primary Meta Tags --><title>Git 命令笔记 | Simon Y.</title><meta name="title" content="Git 命令笔记"><meta name="description" content=""><meta name="author" content="Simon Y."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://simsalyang.github.io/blog/git-command-note/"><meta property="og:title" content="Git 命令笔记"><meta property="og:description" content=""><meta property="og:image" content="https://simsalyang.github.io/og-image/git-command-note.png"><meta property="article:author" content="Simon Y."><meta property="article:published_time" content="2020-07-04T00:00:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://simsalyang.github.io/blog/git-command-note/"><meta property="twitter:title" content="Git 命令笔记"><meta property="twitter:description" content=""><meta property="twitter:image" content="https://simsalyang.github.io/og-image/git-command-note.png"><link rel="stylesheet" href="/_astro/about.Tfa2nFZT.css">
+<link rel="stylesheet" href="/_astro/about.CoeDIuRf.css">
+<style>li[data-astro-cid-zekvapgs]:before{content:"#";margin-right:-.5rem;color:var(--theme-accent)}.active-toc[data-astro-cid-zekvapgs]{color:var(--theme-accent)}
+button[data-astro-cid-xuhzuiaq]{position:fixed;bottom:1rem;left:82%;display:none;height:3rem;width:3rem;align-items:center;justify-content:center;border-radius:9999px;background-color:var(--theme-accent);color:var(--theme-bg);--tw-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);--tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow);transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}button[data-astro-cid-xuhzuiaq]:hover{--tw-scale-x: 1.25;--tw-scale-y: 1.25;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-shadow: 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1);--tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow)}@media (min-width: 640px){button[data-astro-cid-xuhzuiaq]{bottom:2rem;height:2.5rem;width:2.5rem}}@media (min-width: 768px){button[data-astro-cid-xuhzuiaq]{left:90%}}@media (min-width: 1536px){button[data-astro-cid-xuhzuiaq]{left:75%}}
+</style><script type="module" src="/_astro/hoisted.DWBFCYtM.js"></script></head> <body> <header class="group relative mb-8 flex justify-between items-center gap-4" id="main-header" data-astro-cid-3ef6ksr2> <div class="block" data-astro-cid-3ef6ksr2> <a class="title whitespace-nowrap" href="/" data-astro-cid-3ef6ksr2>Simon Y.</a> </div> <nav class="mt-4 bg-surface/95 sm:bg-bgColor absolute hidden top-8 w-full sm:block sm:static sm:mt-0 group-[.menu-open]:z-50 group-[.menu-open]:flex group-[.menu-open]:bg-bgColor" id="navigation-menu" aria-label="main menu" data-astro-cid-3ef6ksr2> <div class="space-y-1 px-2 pb-3 pt-2 sm:flex sm:px-0 sm:py-0 sm:space-y-0 sm:space-x-2" data-astro-cid-3ef6ksr2> <a href="/" class="block py-2 sm:py-0" title="Home" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Home </a> <a href="/blog" class="block py-2 sm:py-0" title="Blog" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Blog </a> <a href="/books" class="block py-2 sm:py-0" title="Books" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Books </a> <a href="/archive" class="block py-2 sm:py-0" title="Archive" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Archive </a> <a href="/about" class="block py-2 sm:py-0" title="About" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> About </a>  <a href="/tags" class="sm:hidden block py-2 sm:py-0" title="tags" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Tags </a>  <a href="/series" class="sm:hidden block py-2 sm:py-0" title="series" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Series </a>  </div> </nav> <div class="flex gap-2 items-center justify-center" data-astro-cid-3ef6ksr2> <button id="themeToggle" class="transition-all relative" aria-label="toggle theme" data-astro-cid-x3pjskd3> <svg width="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-astro-cid-x3pjskd3> <path class="sun opacity-100 transition-all dark:scale-0 dark:opacity-0" fill-rule="evenodd" d="M12 17.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm0 1.5a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm12-7a.8.8 0 0 1-.8.8h-2.4a.8.8 0 0 1 0-1.6h2.4a.8.8 0 0 1 .8.8zM4 12a.8.8 0 0 1-.8.8H.8a.8.8 0 0 1 0-1.6h2.5a.8.8 0 0 1 .8.8zm16.5-8.5a.8.8 0 0 1 0 1l-1.8 1.8a.8.8 0 0 1-1-1l1.7-1.8a.8.8 0 0 1 1 0zM6.3 17.7a.8.8 0 0 1 0 1l-1.7 1.8a.8.8 0 1 1-1-1l1.7-1.8a.8.8 0 0 1 1 0zM12 0a.8.8 0 0 1 .8.8v2.5a.8.8 0 0 1-1.6 0V.8A.8.8 0 0 1 12 0zm0 20a.8.8 0 0 1 .8.8v2.4a.8.8 0 0 1-1.6 0v-2.4a.8.8 0 0 1 .8-.8zM3.5 3.5a.8.8 0 0 1 1 0l1.8 1.8a.8.8 0 1 1-1 1L3.5 4.6a.8.8 0 0 1 0-1zm14.2 14.2a.8.8 0 0 1 1 0l1.8 1.7a.8.8 0 0 1-1 1l-1.8-1.7a.8.8 0 0 1 0-1z" data-astro-cid-x3pjskd3></path> <path class="moon opacity-0 transition-all dark:scale-100 dark:opacity-100" fill-rule="evenodd" d="M16.5 6A10.5 10.5 0 0 1 4.7 16.4 8.5 8.5 0 1 0 16.4 4.7l.1 1.3zm-1.7-2a9 9 0 0 1 .2 2 9 9 0 0 1-11 8.8 9.4 9.4 0 0 1-.8-.3c-.4 0-.8.3-.7.7a10 10 0 0 0 .3.8 10 10 0 0 0 9.2 6 10 10 0 0 0 4-19.2 9.7 9.7 0 0 0-.9-.3c-.3-.1-.7.3-.6.7a9 9 0 0 1 .3.8z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script>
+  const theme = (() => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+      return 'light';
+  })();
+
+  if (theme === 'light') {
+    document.documentElement.classList.remove('dark');
+  } else {
+    document.documentElement.classList.add('dark');
+  }
+
+  window.localStorage.setItem('theme', theme);
+
+  const handleToggleClick = () => {
+    const element = document.documentElement;
+    element.classList.toggle("dark");
+
+    const isDark = element.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  }
+
+  document.getElementById("themeToggle").addEventListener("click", handleToggleClick);
+</script> <nav-button data-astro-cid-3ef6ksr2> <div class="sm:hidden" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>open main menu</span> <button class="group flex items-center justify-center" type="button" id="navigation-menu-btn" aria-label="Open main menu" aria-expanded="false" aria-haspopup="menu" data-astro-cid-3ef6ksr2> <!-- icon when menu is closed --> <svg class="transform transition-all duration-150 ease-out group-aria-expanded:scale-0 group-aria-expanded:opacity-0 h-6 w-6 block group-aria-expanded:hidden" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" data-astro-cid-3ef6ksr2></path> </svg> <!-- icon when menu is open --> <svg class="transform transition-all duration-150 ease-out h-6 w-6 scale-0 text-accent opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100 hidden group-aria-expanded:block" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" data-astro-cid-3ef6ksr2></path> </svg> </button> </div> </nav-button> </div> </header>   <main class="grid grid-cols-1 gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-4">  <article class="cody-bg prose dark:prose-invert prose-cody text-textColor max-w-4xl"> <header class="space-y-2"> <div class="aspect-h-9 aspect-w-16 mb-6 w-full flex justify-center"> <img src="" alt="" class="m-0"> </div> <div class="md:sr-only not-sr-only"> <span>Part of series:</span> <a class="cody-link" href="/series/tech">tech</a> </div> <div class="flex gap-2 items-center"> <h1 class="text-3xl my-0">Git 命令笔记</h1>  </div> <span class="font-semibold text-textColor flex gap-2 items-center"> <time datetime="2020-07-04T00:00:00.000Z" title="4 July 2020"> 4 July 2020 </time> <span>
+/ 12 min read </span>  </span> <ul class="not-prose flex gap-2 flex-wrap"> <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" class="w-5 h-5" astro-icon="carbon:tag-group"><circle cx="10" cy="14" r="2" fill="currentColor"/><path fill="currentColor" d="M16 30a1 1 0 0 1-.71-.29L4.59 19A2 2 0 0 1 4 17.59V10a2 2 0 0 1 2-2h7.59a2 2 0 0 1 1.41.59l10.71 10.7a1 1 0 0 1 0 1.42l-9 9A1 1 0 0 1 16 30zM6 10v7.59l10 10L23.59 20l-10-10z"/><path fill="currentColor" d="M27.71 13.29 17 2.59A2 2 0 0 0 15.59 2H8a2 2 0 0 0-2 2v2h2V4h7.59l10 10-1.3 1.29 1.42 1.42 2-2a1 1 0 0 0 0-1.42z"/></svg> <li class="tag"> <a href="/tags/note">note</a> </li><li class="tag"> <a href="/tags/git">git</a> </li><li class="tag"> <a href="/tags/shell">shell</a> </li> </ul> </header> <hr class="my-4"> <main class="prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none prose-a:text-accent">  <p>记录一些常用的 git 命令，在使用的过程中，根据需求再不断添加。</p>
+<h2 id="1-fork-项目与-clone-项目">1. fork 项目与 clone 项目</h2>
+<p>把其他人的项目复制到自己的仓库里的操作叫做 fork，fork 完之后，这个项目就是你自己的了。</p>
+<p>无论是 fork 的或是自己创建的 GitHub 项目，在网站上编辑总是太麻烦了，把整个项目拷贝到自己电脑里的操作就叫做 clone。clone 的操作需要用到 git 命令，那么首先电脑上得有 git 命令工具，Windows 电脑直接在 GitHub 上下载 <a href="https://git-for-windows.github.io/">git-for-windows</a> 就可以了。如果想深入了解 git 的话，可以看看这本书 <a href="http://iissnan.com/progit/">Pro Git</a> 。</p>
+<p>安装完 git 后，运行 git bash，首先创建一个你需要放置 clone 的项目的文件夹，并 clone 你的项目到这个文件夹，需要用到以下命令：</p>
+<p><code>cd 路径</code> --- 前往你要进行下一步操作的路径</p>
+<p><code>mkdir 文件夹名</code> --- 创建一文件夹</p>
+<p><code>git clone 项目地址</code> --- 将项目 clone 到你的电脑里。</p>
+<p><strong>举个例子</strong></p>
+<blockquote>
+<p>加入在你的 GitHub 上有一个项目叫做 myProject,你的 GitHub 用户名叫做 username,你要把 myProject 项目 clone 到你的电脑 E 盘下新建的 GitHubProject 文件夹里应该怎么操作呢？</p>
+</blockquote>
+<p>首先在你的 GitHub 页面 myProject 项目界面上会有 <code>Clone or Download</code> 的下拉按钮，点击它，你会看到 <code>https://github.com/username/myProject.git</code> 的网址，这个就是你 clone 是要用到的地址，把它复制下来。</p>
+<p>然后打开 git bash，依次输入以下命令：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">cd</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> e:</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">mkdir</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> GitHubProject</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">cd</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> GitHubProject/</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> clone</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> https://github.com/username/myProject.git</span></span>
+<span class="line"></span></code></pre>
+<p>现在打开 E 盘，在 GitHubProject 文件里，你应该能看到 myProject 文件夹，这就是你 clone 到的项目。</p>
+<h2 id="2-本地更新项目后提交到远程">2. 本地更新项目后提交到远程</h2>
+<p>项目 clone 到本地后，当然是为了方便更新项目，更新完之后，如何把项目提交到远程呢，使得在 GitHub 网页上看到的和电脑文件夹看到的一致呢，继续接下来的操作，需要用的以下命令。</p>
+<p><code>git status</code> --- 查看本地项目的状态</p>
+<p><code>git add -A</code> --- 把你的更新添加到缓存中去，表示已经准备好提交了，<code>-A</code> 表示把你的整个项目都放到缓存中。</p>
+<p><code>git commit -m "说明"</code> --- 提交你的更新，引号的里的说明是简要介绍一下你都更新了些什么内容。</p>
+<p><code>git push origin master</code> --- 将你的更新推送到远程项目中。</p>
+<p><strong>举个例子</strong></p>
+<blockquote>
+<p>假如你在 E:\GitHubProject\myProject\ 中添加了一个 example.md 的文件，现在要把它提交到远程项目中去，要如何操作呢。</p>
+</blockquote>
+<p>打开 git bash ,依次输入以下命令：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">cd</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> e:</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">cd</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> GitHubProject</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">cd</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> myProject</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> add</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -A</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> commit</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -m</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> "添加example.md文件"</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> push</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> master</span></span>
+<span class="line"></span></code></pre>
+<p>如此整个提交过程完成。</p>
+<h2 id="3-如何保持-fork-别人的项目在自己的仓库里保持更新">3. 如何保持 fork 别人的项目在自己的仓库里保持更新</h2>
+<blockquote>
+<p>假设在 E:\GitHubProject\ 文件夹中有个 otherProject 文件夹是你 fork 自其他人的项目，如何确保创建项目的人更新了项目后，你能同步他更新后的项目呢，只需要如下几步操作就可以了。</p>
+</blockquote>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">#首先确定是否建立了主项目的远程源</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> remote</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -v</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">#如果里面只有你自己的两个源( fetch 和 push )，那就需要添加主项目的源</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">#Url 表示主项目的地址</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> remote</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> add</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> upstream</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> Url</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">#再次确定远程源，就能看到有四个源，两个前缀是 origin ，两个前缀是 upstream,前缀是 upstream 的就是主项目的远程源</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> remote</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -v</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">#切换到 master 分支</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> checkout</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> master</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">#与主项目合并</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> fetch</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> upstream</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> merge</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> upstream/master</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">#推送到远程</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> push</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> master</span></span>
+<span class="line"></span></code></pre>
+<p>至此，你 fork 的项目就与 源项目保持一致了。</p>
+<h2 id="4-向客户端添加-ssh-key">4. 向客户端添加 SSH key</h2>
+<ol>
+<li>查看客户端是否存在 ssh 私钥</li>
+</ol>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">ls</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -al</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> ~/.ssh</span></span>
+<span class="line"></span></code></pre>
+<ol start="2">
+<li>生成私钥</li>
+</ol>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> ssh-keygen</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -t</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> rsa</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -b</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 4096</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -C</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> "yourname@email.com"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">Enter</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> file</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> in</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> which</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> to</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> save</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> the</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> key</span><span style="color:#9399B2;--shiki-dark:#7C7F93">(</span><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">...</span><span style="color:#9399B2;--shiki-dark:#7C7F93">)</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">:#直接按</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> Enter</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> 默认文件</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">Enter</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> passphrase</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> (empty </span><span style="color:#A6E3A1;--shiki-dark:#40A02B">for</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> no</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> passphrase</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69">):#默认为空，下同</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">Enter</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> same</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> passphrase</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> again:</span></span>
+<span class="line"></span></code></pre>
+<p>成功，会显示一副 SSH key 图形。</p>
+<ol start="3">
+<li>添加 SSH key 到 ssh-agent</li>
+</ol>
+<p>首先确保 ssh-agent 在运行</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> eval</span><span style="color:#9399B2;--shiki-dark:#7C7F93"> $(</span><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">ssh-agent</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -s</span><span style="color:#9399B2;--shiki-dark:#7C7F93">)</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">Agent</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> pid</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> xxxx</span><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"> #已运行</span></span>
+<span class="line"></span></code></pre>
+<p>然后将 SSH 私钥添加到 ssh-agent</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">ssh-add</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> ~/.ssh/id_rsa</span></span>
+<span class="line"></span></code></pre>
+<p>完成。</p>
+<ol start="4">
+<li>复制公钥到 GitHub 账户</li>
+</ol>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> clip</span><span style="color:#94E2D5;--shiki-dark:#179299"> &#x3C;</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> ~/.ssh/id_rsa.pub</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">#或用编辑器打开该文件复制</span></span>
+<span class="line"></span></code></pre>
+<p>登录 <a href="https://github.com">GitHub</a> ，点击头像找到 <code>Setting</code> ---> <code>SSH and GPG keys</code>，点击 <code>New SSH key</code> ,输入 <code>Title</code> 名，将复制的公钥粘贴到 <code>Key</code> 里。</p>
+<ol start="5">
+<li>验证 SSH key</li>
+</ol>
+<p>在 Git bash 中输入：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">ssh</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -T</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git@github.com</span></span>
+<span class="line"></span></code></pre>
+<p>会显示类似如下信息：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">The</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> authenticity</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> of</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> host</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> 'github.com (13.229.188.59)'</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> can't be established.</span></span>
+<span class="line"><span style="color:#A6E3A1;--shiki-dark:#40A02B">RSA key fingerprint is SHA256:************************************.</span></span>
+<span class="line"><span style="color:#A6E3A1;--shiki-dark:#40A02B">Are you sure you want to continue connecting (yes/no)?</span></span>
+<span class="line"></span></code></pre>
+<p>输入 <code>yes</code> 则会显示如下信息：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">Warning:</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> Permanently</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> added</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> 'github.com,13.229.188.59'</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> (RSA) to the list of known hosts.</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">Hi</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> UserName!</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> You've successfully authenticated, but GitHub does not provide shell access.</span></span>
+<span class="line"></span></code></pre>
+<p>即表示 SSH key 设置成功。</p>
+<h2 id="5-https-与-ssh-url-互换">5. HTTPS 与 SSH URL 互换</h2>
+<p>使用 https url 克隆项目后，每次 push 代码都要提示输入用户名和密码，很烦，怎么办？使用 SSH url。可是我们的项目已经用 https 克隆到本地了，又不想把本地的项目删除了，再用 ssh 重新克隆一遍，还好 GitHub 为我们提供了解决办法，直接将 HTTPS URL 切换成 SSH URL，很方便。当然反过来也是可以切换的。</p>
+<p>使用到的命令就一条：<code>git remote set-url your-repository-url</code> 。</p>
+<h3 id="51-https-切换为-ssh">5.1 HTTPS 切换为 SSH</h3>
+<ol>
+<li>打开终端</li>
+<li>进入到项目根目录</li>
+<li>先检查当前项目的远程 url 获取要修改的远程名称。</li>
+</ol>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> remote</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -v</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">  https://github.com/_USERNAME/REPOSITORY_.git</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> (fetch)</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">  https://github.com/_USERNAME/REPOSITORY_.git</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> (push)</span></span>
+<span class="line"></span></code></pre>
+<ol start="4">
+<li>切换 url</li>
+</ol>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> remote</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> set-url</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git@github.com:_USERNAME_/_REPOSITORY_.git</span></span>
+<span class="line"></span></code></pre>
+<ol start="5">
+<li>验证 url</li>
+</ol>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> remote</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -v</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># Verify new remote URL</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">  git@github.com:_USERNAME/REPOSITORY_.git</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> (fetch)</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">  git@github.com:_USERNAME/REPOSITORY_.git</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> (push)</span></span>
+<span class="line"></span></code></pre>
+<h3 id="52-ssh-切换为-https">5.2 SSH 切换为 HTTPS</h3>
+<ol>
+<li>打开终端</li>
+<li>进入到项目根目录</li>
+<li>先检查当前项目的远程 url 获取要修改的远程名称。</li>
+</ol>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> remote</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -v</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">  git@github.com:_USERNAME/REPOSITORY_.git</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> (fetch)</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">  git@github.com:_USERNAME/REPOSITORY_.git</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> (push)</span></span>
+<span class="line"></span></code></pre>
+<ol start="4">
+<li>切换 url</li>
+</ol>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> remote</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> set-url</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> https://github.com/_USERNAME_/_REPOSITORY_.git</span></span>
+<span class="line"></span></code></pre>
+<ol start="5">
+<li>验证 url</li>
+</ol>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">$</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> remote</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -v</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># Verify new remote URL</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">  https://github.com/_USERNAME/REPOSITORY_.git</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> (fetch)</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">origin</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">  https://github.com/_USERNAME/REPOSITORY_.git</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> (push)</span></span>
+<span class="line"></span></code></pre>
+<h2 id="6-让-git-commit-更好看---git-commit-emoji">6. 让 git commit 更好看 - git commit emoji</h2>
+<p>提交代码时，在 commit 摘要里添加 emoji，让提交摘要丰富多彩，当然使用 emoji 也要符合规范。</p>
+<p>代码示例：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> commit</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -m</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> ':tada: Initialize Repo'</span><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"> #初次提交代码</span></span>
+<span class="line"></span></code></pre>
+<p>emoji 自查表：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">emoji</th><th align="left">emoji 代码</th><th align="left">commit 说明</th></tr></thead><tbody><tr><td align="left">🎉 (庆祝)</td><td align="left"><code>:tada:</code></td><td align="left">初次提交</td></tr><tr><td align="left">✨ (火花)</td><td align="left"><code>:sparkles:</code></td><td align="left">引入新功能</td></tr><tr><td align="left">🔖 (书签)</td><td align="left"><code>:bookmark:</code></td><td align="left">发行/版本标签</td></tr><tr><td align="left">🐛 (bug)</td><td align="left"><code>:bug:</code></td><td align="left">修复 bug</td></tr><tr><td align="left">🚑 (急救车)</td><td align="left"><code>:ambulance:</code></td><td align="left">重要补丁</td></tr><tr><td align="left">🌐 (地球)</td><td align="left"><code>:globe_with_meridians:</code></td><td align="left">国际化与本地化</td></tr><tr><td align="left">💄 (口红)</td><td align="left"><code>:lipstick:</code></td><td align="left">更新 UI 和样式文件</td></tr><tr><td align="left">🚨 (警车灯)</td><td align="left"><code>:rotating_light:</code></td><td align="left">移除 linter 警告</td></tr><tr><td align="left">🔧 (扳手)</td><td align="left"><code>:wrench:</code></td><td align="left">修改配置文件</td></tr><tr><td align="left">➕ (加号)</td><td align="left"><code>:heavy_plus_sign:</code></td><td align="left">增加一个依赖</td></tr><tr><td align="left">➖ (减号)</td><td align="left"><code>:heavy_minus_sign:</code></td><td align="left">减少一个依赖</td></tr><tr><td align="left">⬆️ (上升箭头)</td><td align="left"><code>:arrow_up:</code></td><td align="left">升级依赖</td></tr><tr><td align="left">⬇️ (下降箭头)</td><td align="left"><code>:arrow_down:</code></td><td align="left">降级依赖</td></tr><tr><td align="left">⚡️ (闪电)🐎 (赛马)</td><td align="left"><code>:zap:</code> <code>:racehorse:</code></td><td align="left">提升性能</td></tr><tr><td align="left">📈 (上升趋势图)</td><td align="left"><code>:chart_with_upwards_trend:</code></td><td align="left">添加分析或跟踪代码</td></tr><tr><td align="left">🚀 (火箭)</td><td align="left"><code>:rocket:</code></td><td align="left">部署功能</td></tr><tr><td align="left">✅ (白色复选框)</td><td align="left"><code>:white_check_mark:</code></td><td align="left">增加测试</td></tr><tr><td align="left">📝 (备忘录)</td><td align="left"><code>:memo:</code></td><td align="left">撰写文档</td></tr><tr><td align="left">🔨 (锤子)</td><td align="left"><code>:hammer:</code></td><td align="left">重大重构</td></tr><tr><td align="left">🎨 (调色板)</td><td align="left"><code>:art:</code></td><td align="left">改进代码结构/代码格式</td></tr><tr><td align="left">🔥 (火焰)</td><td align="left"><code>:fire:</code></td><td align="left">移除代码或文件</td></tr><tr><td align="left">✏️ (铅笔)</td><td align="left"><code>:pencil2:</code></td><td align="left">修复 typo</td></tr><tr><td align="left">🚧 (施工)</td><td align="left"><code>:construction:</code></td><td align="left">工作进行中</td></tr><tr><td align="left">👷 (工人)</td><td align="left"><code>:construction_worker:</code></td><td align="left">添加 CI 构建系统</td></tr><tr><td align="left">💚 (绿心)</td><td align="left"><code>:green_heart:</code></td><td align="left">修复 CI 构建问题</td></tr><tr><td align="left">🔒 (锁)</td><td align="left"><code>:lock:</code></td><td align="left">修复安全问题</td></tr><tr><td align="left">🐳 (鲸鱼)</td><td align="left"><code>:whale:</code></td><td align="left">Docker 相关工作</td></tr><tr><td align="left">🍎 (苹果)</td><td align="left"><code>:apple:</code></td><td align="left">修复 macOS 下的问题</td></tr><tr><td align="left">🐧 (企鹅)</td><td align="left"><code>:penguin:</code></td><td align="left">修复 Linux 下的问题</td></tr><tr><td align="left">🏁 (旗帜)</td><td align="left"><code>:checked_flag:</code></td><td align="left">修复 Windows 下的问题</td></tr></tbody></table>
+<h2 id="7-git-分支">7. Git 分支</h2>
+<p>创建分支的作用可以很方便的对项目进行管理，用 <code>master</code> 主分支进行项目的发布，用其他分支为项目添加新功能以及做测试工作，当测试完成后，将自己创建的分支合并到 <code>master</code> 分支，完成新功能发布。</p>
+<h3 id="71-创建切换分支">7.1 创建切换分支</h3>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> branch</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> branch-name</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> checkout</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> branch-name</span></span>
+<span class="line"></span></code></pre>
+<p>或</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> checkout</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -b</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> branch-name</span></span>
+<span class="line"></span></code></pre>
+<p><code>branch-name</code> 是创建的分支名。<code>git checkout -b</code> 中的参数 <code>-b</code> 表示创建并切换分支，是上面两条命令的精简版。</p>
+<h3 id="72-查看分支">7.2 查看分支</h3>
+<p>使用如下命令查看分支：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> branch</span></span>
+<span class="line"></span></code></pre>
+<p>该命令会列出所有分支，当前分支前标有 <code>*</code> 号。</p>
+<h3 id="73-在新的分支上提交">7.3 在新的分支上提交</h3>
+<p>切换到新分支后，对项目文件进行修改后，在该新分支上提交，尔后在 GitHub 的新分支中就能看到新的提交，但在 <code>master</code> 分支上则看不到新提交的内容。</p>
+<h3 id="74-合并到主分支">7.4 合并到主分支</h3>
+<p>使用命令 <code>git checkout master</code> 切换到主分支后，使用如下命令将新分支下修改的内容合并到主分支：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> merge</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> new-branch-name</span></span>
+<span class="line"></span></code></pre>
+<h3 id="74-删除分支">7.4 删除分支</h3>
+<p>当一个分支不再使用时，可以用如下命令将其删除：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">git</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> branch</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -d</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> branch-name</span></span>
+<span class="line"></span></code></pre>  </main> <button id="back-to-top-btn" aria-label="back to top" class="z-50" data-astro-cid-xuhzuiaq> <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" data-astro-cid-xuhzuiaq class="w-7 h-7 sm:w-5 s:h-6" astro-icon="carbon:arrow-up"><path fill="currentColor" d="M16 4 6 14l1.41 1.41L15 7.83V28h2V7.83l7.59 7.58L26 14 16 4z"/></svg> </button>   </article>   <aside class="hidden sm:block"> <div class="flex flex-col space-y-2"> <h2 class="font-semibold text-lg text-textColor">Simon Y.</h2> <p>Reading, writing, and learning.</p> <div class="flex flex-wrap items-end gap-x-4"> <ul class="flex flex-wrap flex-1 items-center gap-x-2 sm:flex-initial"> <li class="flex"> <a class="inline-block p-1 sm:hover:text-accent" href="https://github.com/SimsalYang" target="_blank" rel="noopener noreferrer" title="Github"> <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="h-5 w-5" astro-icon="mdi:github"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg> <span class="sr-only">Github</span> </a> </li><li class="flex"> <a class="inline-block p-1 sm:hover:text-accent" href="/rss.xml" target="_blank" rel="noopener noreferrer" title="rss"> <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="h-5 w-5" astro-icon="mdi:rss"><path fill="currentColor" d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20 5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg> <span class="sr-only">rss</span> </a> </li> </ul> </div> <span class="!my-4 text-accent" aria-hidden>---</span> <p>  </p> <div class="pt-2 hidden md:block"> <span>Part of series: </span> <br> <ul> <li><a class="cody-link" href="/series/tech">tech</a></li> </ul> </div> </div> <nav class="sticky top-20 order-2 hidden basis-64 lg:block"> <hr> <h2 class="font-bold text-lg">Table of Contents</h2> <ul class="-me-32" id="toc"> <li data-astro-cid-zekvapgs> <a href="#1-fork-项目与-clone-项目" id="toc-1-fork-项目与-clone-项目" data-astro-cid-zekvapgs> 1. fork 项目与 clone 项目 </a>  </li> <li data-astro-cid-zekvapgs> <a href="#2-本地更新项目后提交到远程" id="toc-2-本地更新项目后提交到远程" data-astro-cid-zekvapgs> 2. 本地更新项目后提交到远程 </a>  </li> <li data-astro-cid-zekvapgs> <a href="#3-如何保持-fork-别人的项目在自己的仓库里保持更新" id="toc-3-如何保持-fork-别人的项目在自己的仓库里保持更新" data-astro-cid-zekvapgs> 3. 如何保持 fork 别人的项目在自己的仓库里保持更新 </a>  </li> <li data-astro-cid-zekvapgs> <a href="#4-向客户端添加-ssh-key" id="toc-4-向客户端添加-ssh-key" data-astro-cid-zekvapgs> 4. 向客户端添加 SSH key </a>  </li> <li data-astro-cid-zekvapgs> <a href="#5-https-与-ssh-url-互换" id="toc-5-https-与-ssh-url-互换" data-astro-cid-zekvapgs> 5. HTTPS 与 SSH URL 互换 </a> <ul class="ml-2" data-astro-cid-zekvapgs> <li data-astro-cid-zekvapgs> <a href="#51-https-切换为-ssh" id="toc-51-https-切换为-ssh" data-astro-cid-zekvapgs> 5.1 HTTPS 切换为 SSH </a>  </li> <li data-astro-cid-zekvapgs> <a href="#52-ssh-切换为-https" id="toc-52-ssh-切换为-https" data-astro-cid-zekvapgs> 5.2 SSH 切换为 HTTPS </a>  </li>  </ul> </li> <li data-astro-cid-zekvapgs> <a href="#6-让-git-commit-更好看---git-commit-emoji" id="toc-6-让-git-commit-更好看---git-commit-emoji" data-astro-cid-zekvapgs> 6. 让 git commit 更好看 - git commit emoji </a>  </li> <li data-astro-cid-zekvapgs> <a href="#7-git-分支" id="toc-7-git-分支" data-astro-cid-zekvapgs> 7. Git 分支 </a> <ul class="ml-2" data-astro-cid-zekvapgs> <li data-astro-cid-zekvapgs> <a href="#71-创建切换分支" id="toc-71-创建切换分支" data-astro-cid-zekvapgs> 7.1 创建切换分支 </a>  </li> <li data-astro-cid-zekvapgs> <a href="#72-查看分支" id="toc-72-查看分支" data-astro-cid-zekvapgs> 7.2 查看分支 </a>  </li> <li data-astro-cid-zekvapgs> <a href="#73-在新的分支上提交" id="toc-73-在新的分支上提交" data-astro-cid-zekvapgs> 7.3 在新的分支上提交 </a>  </li> <li data-astro-cid-zekvapgs> <a href="#74-合并到主分支" id="toc-74-合并到主分支" data-astro-cid-zekvapgs> 7.4 合并到主分支 </a>  </li> <li data-astro-cid-zekvapgs> <a href="#74-删除分支" id="toc-74-删除分支" data-astro-cid-zekvapgs> 7.4 删除分支 </a>  </li>  </ul> </li>  </ul> </nav>  </aside> </main> <footer class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pb-4 pt-20 text-center align-top font-semibold sm:flex-row sm:justify-between sm:text-xs text-textColor mb-8"> <div class="mr-2 sm:mr-0">
+Copyright &copy; 2024  Simon Y. </div> <nav aria-label="More on this site" class="gap-x-0 sm:gap-x-2 sm:flex sm:divide-x sm:divide-accent"> <a href="/" class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"> Home </a><a href="/blog" class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"> Blog </a><a href="/books" class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"> Books </a><a href="/archive" class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"> Archive </a><a href="/about" class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"> About </a> </nav> </footer>
+</html</body></html> 

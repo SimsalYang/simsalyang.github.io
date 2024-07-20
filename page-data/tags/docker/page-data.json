@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
-    "path": "/tags/docker",
-    "result": {"data":{"allPost":{"nodes":[{"slug":"/linux-install-and-use-docker","title":"Linux 安装和使用 Docker 笔记","date":"2022-02-21","excerpt":"这是一篇旧的 dokcer 笔记，大部分内容是基于  Docker Desktop for Windows  写的，但也适用于其他平台。 安装 Docker 先决条件 64 位系统 Linux 内核大于 3.8 内核必须支持并开启 cgroup 和命名空间（namespace…","timeToRead":2,"description":null,"tags":[{"name":"notes","slug":"notes"},{"name":"docker","slug":"docker"},{"name":"linux","slug":"linux"}]}]}},"pageContext":{"slug":"docker","name":"docker","formatString":"YYYY-MM-DD"}},
-    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

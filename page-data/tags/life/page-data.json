@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
-    "path": "/tags/life",
-    "result": {"data":{"allPost":{"nodes":[{"slug":"/success-using-gatsby-rebuilding-website/","title":"成功使用 Gatsby 重新搭建网站","date":"2022-02-03","excerpt":"经过这几天的折腾，使用 Gatsby 重新搭建网站，终于成功了！ 0. 出现的问题 这个过程中，有几个要点需要注意： 1.使用了 Gatsby 的插件，需要在  gatsby-config.js  中配置，否则无法使用。 2.替换主题文件时，只需要在  src/blog…","timeToRead":1,"description":null,"tags":[{"name":"life","slug":"life"},{"name":"blog","slug":"blog"}]},{"slug":"/使用-gatsby重新搭建博客","title":"使用Gatsby重新搭建博客","date":"2022-01-28","excerpt":"原本使用  VuePress  搭建的博客，因为长期没有维护，升级新版本后，原来的主题不能使用，刚好自己一直在学习  React ，觉得有必要用起来， Gatsby  就是使用的  React…","timeToRead":1,"description":null,"tags":[{"name":"life","slug":"life"}]}]}},"pageContext":{"slug":"life","name":"life","formatString":"YYYY-MM-DD"}},
-    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

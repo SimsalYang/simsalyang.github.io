@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="en" class="dark"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.11.0"><!-- Font preloads --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://simsalyang.github.io/blog/nginx-note/"><!-- Primary Meta Tags --><title>nginx 笔记 | Simon Y.</title><meta name="title" content="nginx 笔记"><meta name="description" content=""><meta name="author" content="Simon Y."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://simsalyang.github.io/blog/nginx-note/"><meta property="og:title" content="nginx 笔记"><meta property="og:description" content=""><meta property="og:image" content="https://simsalyang.github.io/og-image/nginx-note.png"><meta property="article:author" content="Simon Y."><meta property="article:published_time" content="2020-07-04T00:00:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://simsalyang.github.io/blog/nginx-note/"><meta property="twitter:title" content="nginx 笔记"><meta property="twitter:description" content=""><meta property="twitter:image" content="https://simsalyang.github.io/og-image/nginx-note.png"><link rel="stylesheet" href="/_astro/about.Tfa2nFZT.css">
+<link rel="stylesheet" href="/_astro/about.CoeDIuRf.css">
+<style>li[data-astro-cid-zekvapgs]:before{content:"#";margin-right:-.5rem;color:var(--theme-accent)}.active-toc[data-astro-cid-zekvapgs]{color:var(--theme-accent)}
+button[data-astro-cid-xuhzuiaq]{position:fixed;bottom:1rem;left:82%;display:none;height:3rem;width:3rem;align-items:center;justify-content:center;border-radius:9999px;background-color:var(--theme-accent);color:var(--theme-bg);--tw-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);--tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow);transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}button[data-astro-cid-xuhzuiaq]:hover{--tw-scale-x: 1.25;--tw-scale-y: 1.25;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-shadow: 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1);--tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow)}@media (min-width: 640px){button[data-astro-cid-xuhzuiaq]{bottom:2rem;height:2.5rem;width:2.5rem}}@media (min-width: 768px){button[data-astro-cid-xuhzuiaq]{left:90%}}@media (min-width: 1536px){button[data-astro-cid-xuhzuiaq]{left:75%}}
+</style><script type="module" src="/_astro/hoisted.DWBFCYtM.js"></script></head> <body> <header class="group relative mb-8 flex justify-between items-center gap-4" id="main-header" data-astro-cid-3ef6ksr2> <div class="block" data-astro-cid-3ef6ksr2> <a class="title whitespace-nowrap" href="/" data-astro-cid-3ef6ksr2>Simon Y.</a> </div> <nav class="mt-4 bg-surface/95 sm:bg-bgColor absolute hidden top-8 w-full sm:block sm:static sm:mt-0 group-[.menu-open]:z-50 group-[.menu-open]:flex group-[.menu-open]:bg-bgColor" id="navigation-menu" aria-label="main menu" data-astro-cid-3ef6ksr2> <div class="space-y-1 px-2 pb-3 pt-2 sm:flex sm:px-0 sm:py-0 sm:space-y-0 sm:space-x-2" data-astro-cid-3ef6ksr2> <a href="/" class="block py-2 sm:py-0" title="Home" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Home </a> <a href="/blog" class="block py-2 sm:py-0" title="Blog" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Blog </a> <a href="/books" class="block py-2 sm:py-0" title="Books" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Books </a> <a href="/archive" class="block py-2 sm:py-0" title="Archive" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Archive </a> <a href="/about" class="block py-2 sm:py-0" title="About" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> About </a>  <a href="/tags" class="sm:hidden block py-2 sm:py-0" title="tags" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Tags </a>  <a href="/series" class="sm:hidden block py-2 sm:py-0" title="series" data-astro-prefetch data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Series </a>  </div> </nav> <div class="flex gap-2 items-center justify-center" data-astro-cid-3ef6ksr2> <button id="themeToggle" class="transition-all relative" aria-label="toggle theme" data-astro-cid-x3pjskd3> <svg width="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-astro-cid-x3pjskd3> <path class="sun opacity-100 transition-all dark:scale-0 dark:opacity-0" fill-rule="evenodd" d="M12 17.5a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm0 1.5a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm12-7a.8.8 0 0 1-.8.8h-2.4a.8.8 0 0 1 0-1.6h2.4a.8.8 0 0 1 .8.8zM4 12a.8.8 0 0 1-.8.8H.8a.8.8 0 0 1 0-1.6h2.5a.8.8 0 0 1 .8.8zm16.5-8.5a.8.8 0 0 1 0 1l-1.8 1.8a.8.8 0 0 1-1-1l1.7-1.8a.8.8 0 0 1 1 0zM6.3 17.7a.8.8 0 0 1 0 1l-1.7 1.8a.8.8 0 1 1-1-1l1.7-1.8a.8.8 0 0 1 1 0zM12 0a.8.8 0 0 1 .8.8v2.5a.8.8 0 0 1-1.6 0V.8A.8.8 0 0 1 12 0zm0 20a.8.8 0 0 1 .8.8v2.4a.8.8 0 0 1-1.6 0v-2.4a.8.8 0 0 1 .8-.8zM3.5 3.5a.8.8 0 0 1 1 0l1.8 1.8a.8.8 0 1 1-1 1L3.5 4.6a.8.8 0 0 1 0-1zm14.2 14.2a.8.8 0 0 1 1 0l1.8 1.7a.8.8 0 0 1-1 1l-1.8-1.7a.8.8 0 0 1 0-1z" data-astro-cid-x3pjskd3></path> <path class="moon opacity-0 transition-all dark:scale-100 dark:opacity-100" fill-rule="evenodd" d="M16.5 6A10.5 10.5 0 0 1 4.7 16.4 8.5 8.5 0 1 0 16.4 4.7l.1 1.3zm-1.7-2a9 9 0 0 1 .2 2 9 9 0 0 1-11 8.8 9.4 9.4 0 0 1-.8-.3c-.4 0-.8.3-.7.7a10 10 0 0 0 .3.8 10 10 0 0 0 9.2 6 10 10 0 0 0 4-19.2 9.7 9.7 0 0 0-.9-.3c-.3-.1-.7.3-.6.7a9 9 0 0 1 .3.8z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script>
+  const theme = (() => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+      return 'light';
+  })();
+
+  if (theme === 'light') {
+    document.documentElement.classList.remove('dark');
+  } else {
+    document.documentElement.classList.add('dark');
+  }
+
+  window.localStorage.setItem('theme', theme);
+
+  const handleToggleClick = () => {
+    const element = document.documentElement;
+    element.classList.toggle("dark");
+
+    const isDark = element.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  }
+
+  document.getElementById("themeToggle").addEventListener("click", handleToggleClick);
+</script> <nav-button data-astro-cid-3ef6ksr2> <div class="sm:hidden" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>open main menu</span> <button class="group flex items-center justify-center" type="button" id="navigation-menu-btn" aria-label="Open main menu" aria-expanded="false" aria-haspopup="menu" data-astro-cid-3ef6ksr2> <!-- icon when menu is closed --> <svg class="transform transition-all duration-150 ease-out group-aria-expanded:scale-0 group-aria-expanded:opacity-0 h-6 w-6 block group-aria-expanded:hidden" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" data-astro-cid-3ef6ksr2></path> </svg> <!-- icon when menu is open --> <svg class="transform transition-all duration-150 ease-out h-6 w-6 scale-0 text-accent opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100 hidden group-aria-expanded:block" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" data-astro-cid-3ef6ksr2></path> </svg> </button> </div> </nav-button> </div> </header>   <main class="grid grid-cols-1 gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-4">  <article class="cody-bg prose dark:prose-invert prose-cody text-textColor max-w-4xl"> <header class="space-y-2"> <div class="aspect-h-9 aspect-w-16 mb-6 w-full flex justify-center"> <img src="" alt="" class="m-0"> </div> <div class="md:sr-only not-sr-only"> <span>Part of series:</span> <a class="cody-link" href="/series/tech">tech</a> </div> <div class="flex gap-2 items-center"> <h1 class="text-3xl my-0">nginx 笔记</h1>  </div> <span class="font-semibold text-textColor flex gap-2 items-center"> <time datetime="2020-07-04T00:00:00.000Z" title="4 July 2020"> 4 July 2020 </time> <span>
+/ 5 min read </span>  </span> <ul class="not-prose flex gap-2 flex-wrap"> <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" class="w-5 h-5" astro-icon="carbon:tag-group"><circle cx="10" cy="14" r="2" fill="currentColor"/><path fill="currentColor" d="M16 30a1 1 0 0 1-.71-.29L4.59 19A2 2 0 0 1 4 17.59V10a2 2 0 0 1 2-2h7.59a2 2 0 0 1 1.41.59l10.71 10.7a1 1 0 0 1 0 1.42l-9 9A1 1 0 0 1 16 30zM6 10v7.59l10 10L23.59 20l-10-10z"/><path fill="currentColor" d="M27.71 13.29 17 2.59A2 2 0 0 0 15.59 2H8a2 2 0 0 0-2 2v2h2V4h7.59l10 10-1.3 1.29 1.42 1.42 2-2a1 1 0 0 0 0-1.42z"/></svg> <li class="tag"> <a href="/tags/nginx">nginx</a> </li><li class="tag"> <a href="/tags/linux">linux</a> </li><li class="tag"> <a href="/tags/note">note</a> </li> </ul> </header> <hr class="my-4"> <main class="prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none prose-a:text-accent">  <p>nginx 安装配置，所有的 bash 命令操作均是在 ubuntu 系统下进行的，其他系统可能略有不同。</p>
+<h2 id="安装">安装</h2>
+<p>ubuntu 系统下安装方法</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">sudo</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> apt</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> install</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> nginx</span></span>
+<span class="line"></span></code></pre>
+<h2 id="nginx-命令行语法">nginx 命令行语法</h2>
+<p>主要有启动、重启、停止 nginx 服务语法。</p>
+<p>使用如下语句：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">## 这是从其他博客中摘抄过来的，在实际操作中，我的 ubuntu 在 /etc/ 目录下并无 init.d 目录</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># 启动</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">sudo</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> /etc/init.d/nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> start</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># 重启</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">sudo</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> /etc/init.d/nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> restart</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># 停止</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">sudo</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> /etc/init.d/nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> stop</span></span>
+<span class="line"></span></code></pre>
+<p>或</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">## 这也是摘抄而来的，实际操作中，我的 ubuntu 系统中无 service</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># 启动</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">sudo</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> service</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> start</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># 重启</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">sudo</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> service</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> restart</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># 停止</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">sudo</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> service</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> stop</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># 重载</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">sudo</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> service</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> reload</span></span>
+<span class="line"></span></code></pre>
+<p>或</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic">## 这是在实际操作中可行的语句</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># 重启</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">sudo</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -s</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> reload</span></span>
+<span class="line"><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"># 停止</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">sudo</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -s</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> stop</span></span>
+<span class="line"></span></code></pre>
+<h2 id="配置文件语法">配置文件语法</h2>
+<p>ubuntu 系统下 nginx 配置文件路径：<code>/etc/nginx/nginx.conf</code>。</p>
+<p>nginx 是模块化的系统，整个系统由一个个模块组成，每个模块负责不同功能，如果不需要某个模块，可以将其去掉，使得 nginx 变得更小巧，更适合自己。</p>
+<p>配置文件大体由三大块组成：<code>events</code> , <code>http</code> , <code>mail</code>。每个块分管不同功能。</p>
+<p>更改配置后，要重启 nginx,执行如下步骤：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -t</span><span style="color:#6C7086;--shiki-dark:#9CA0B0;font-style:italic;--shiki-dark-font-style:italic"> #检查配置文件是否正确</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -c</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> /etc/nginx/nginx.conf</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">nginx</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> -s</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> reload</span></span>
+<span class="line"></span></code></pre>
+<p>执行 <code>nginx -c /etc/nginx/nginx.conf</code> 时如果提示端口被占用，则执行 <code>lsof -i:port</code> 查看被占用端口的程序，然后执行 <code>kill port</code> 杀死该进程，再次执行 <code>nginx -c /etc/nginx/nginx.conf</code> 。</p>
+<p>上述命令如果不是 root 用户，则需在命令前加上 sudo 。</p>
+<h2 id="反向代理">反向代理</h2>
+<p>编辑 <code>/etc/nginx/conf.d</code> 目录下的 <code>default.conf</code> 配置文件，如果不存在的话就新建该文件。在文件中写下如下内容，如果文件中有内容，删除掉原来的内容：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> your_website_name</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    location</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> /</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        proxy_set_header</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> Host</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> $host</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        proxy_set_header</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> X-Real-IP</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> $remote_addr</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        proxy_set_header</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> X-Forwarded-Proto</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> https</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        proxy_set_header</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> X-Forwarded-For</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> $remote_addr</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        proxy_set_header</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> X-Forwarded-Host</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> $remote_addr</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        proxy_http_version</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 1.1</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        proxy_set_header</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> Connection</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> ""</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        proxy_read_timeout</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> 300s</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        proxy_pass</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> http://127.0.0.1:3000</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">//</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> 网站实际端口</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        client_max_body_size</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> 300M</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        sendfile</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> on</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">        send_timeout</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> 300s</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">    }</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+<p>配置静态页面时，用如下内容：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> your_website_name</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    index</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> index.htm</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> index.html</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    root</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> /wwwroot/website</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+<h3 id="配置二级域名反向代理">配置二级域名反向代理</h3>
+<blockquote>
+<p>nginx 反向代理同一 ip 多个域名，给 header 加上 host 就可以了</p>
+</blockquote>
+<h4 id="server_name-使用">server_name 使用</h4>
+<ol>
+<li>
+<p>server_name 匹配顺序</p>
+<ol>
+<li>
+<p>准确的 server_name 匹配</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> foo.bar.com</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">    ...</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+</li>
+<li>
+<p>以 <code>*</code> 通配符开始的字符串</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69"> *</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">.bar.com</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">    ...</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+</li>
+<li>
+<p>以 <code>*</code> 通配符结束的字符串</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> foo.</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69">*</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">    ...</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+</li>
+<li>
+<p>正则表达式</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> ~^</span><span style="color:#9399B2;--shiki-dark:#7C7F93">(</span><span style="color:#94E2D5;--shiki-dark:#179299">?</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69">.+</span><span style="color:#9399B2;--shiki-dark:#7C7F93">)</span><span style="color:#F5C2E7;--shiki-dark:#EA76CB">\.</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">howtocn</span><span style="color:#F5C2E7;--shiki-dark:#EA76CB">\.</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">org</span><span style="color:#CDD6F4;--shiki-dark:#4C4F69">$</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">    ...</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+</li>
+</ol>
+<p>Nginx 将按照 1,2,3,4 的顺序对 server_name 进行匹配，只要有意向匹配就停止搜索。</p>
+</li>
+<li>
+<p>Nginx 多域名配置</p>
+<p>有两种方法，一种是每个域名写一个配置文件，另一种是多个域名写在一个配置文件里</p>
+<ol>
+<li>
+<p>每个域名一个文件</p>
+<p>在 <code>/etc/nginx/conf.d</code> 目录下新建配置文件，例如要绑定 <code>www.foo.com</code> 域名，则建立一个 <code>www.foo.com.conf</code> 文件，然后在文件里填写规则：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> www.foo.com</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">    ...</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> other</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> configure</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> ...</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+<p>需要创建什么域名，就创建一个这样的配置文件。</p>
+</li>
+<li>
+<p>一个文件多个域名</p>
+<p>其实就是把多个 server 配置写在一个文件里</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> www.foo.com</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">    ...</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> other</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> configure</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> ...</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> blog.foo.com</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">    ...</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> other</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> configure</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>不带 www 域名加 301 跳转</p>
+<p>如果不带 www 的域名要加 301 跳转，和绑定域名一样，先绑定不带 www 的域名，不用写网站目录，而是进行 301 跳转，如：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> foo.com</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    rewrite</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> ^/</span><span style="color:#9399B2;--shiki-dark:#7C7F93">(</span><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">.</span><span style="color:#A6E3A1;--shiki-dark:#40A02B">*</span><span style="color:#9399B2;--shiki-dark:#7C7F93">)</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> http://www.foo.com/</span><span style="color:#EBA0AC;--shiki-dark:#E64553;font-style:italic;--shiki-dark-font-style:italic">$1</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> permanent</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+</li>
+<li>
+<p>添加 404 页面</p>
+<p>在 server 中添加 404 规则：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#F38BA8;--shiki-dark:#D20F39;font-style:italic;--shiki-dark-font-style:italic">    ...</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    error_page</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 404</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> /404.html</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+</li>
+<li>
+<p>禁止 ip 直接访问</p>
+<p>在第一个 server 前添加一个 server ，内容如下：</p>
+<pre class="astro-code astro-code-themes catppuccin-mocha catppuccin-latte" style="background-color:#1e1e2e;--shiki-dark-bg:#eff1f5;color:#cdd6f4;--shiki-dark:#4c4f69; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">server</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> {</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    listen</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 80</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> default</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#89B4FA;--shiki-dark:#1E66F5;font-style:italic;--shiki-dark-font-style:italic">    server_name</span><span style="color:#A6E3A1;--shiki-dark:#40A02B"> _</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#CBA6F7;--shiki-dark:#8839EF">    return</span><span style="color:#FAB387;--shiki-dark:#FE640B"> 403</span><span style="color:#9399B2;--shiki-dark:#7C7F93">;</span></span>
+<span class="line"><span style="color:#CDD6F4;--shiki-dark:#4C4F69">}</span></span>
+<span class="line"></span></code></pre>
+</li>
+</ol>
+<hr>
+<p>相关链接：</p>
+<ol>
+<li><a href="https://love2.io/@hfpp2012/doc/nginx-tutorial">nginx 教程</a> @htpp2012</li>
+<li><a href="https://love2.io/@hfpp2012/doc/docker-tutorial">docker 入门指南</a></li>
+<li><a href="http://jingpin.jikexueyuan.com/article/47762.html">Nginx 二级域名及多 Server 反向代理配置</a> -极客学院</li>
+</ol>  </main> <button id="back-to-top-btn" aria-label="back to top" class="z-50" data-astro-cid-xuhzuiaq> <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" data-astro-cid-xuhzuiaq class="w-7 h-7 sm:w-5 s:h-6" astro-icon="carbon:arrow-up"><path fill="currentColor" d="M16 4 6 14l1.41 1.41L15 7.83V28h2V7.83l7.59 7.58L26 14 16 4z"/></svg> </button>   </article>   <aside class="hidden sm:block"> <div class="flex flex-col space-y-2"> <h2 class="font-semibold text-lg text-textColor">Simon Y.</h2> <p>Reading, writing, and learning.</p> <div class="flex flex-wrap items-end gap-x-4"> <ul class="flex flex-wrap flex-1 items-center gap-x-2 sm:flex-initial"> <li class="flex"> <a class="inline-block p-1 sm:hover:text-accent" href="https://github.com/SimsalYang" target="_blank" rel="noopener noreferrer" title="Github"> <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="h-5 w-5" astro-icon="mdi:github"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg> <span class="sr-only">Github</span> </a> </li><li class="flex"> <a class="inline-block p-1 sm:hover:text-accent" href="/rss.xml" target="_blank" rel="noopener noreferrer" title="rss"> <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="h-5 w-5" astro-icon="mdi:rss"><path fill="currentColor" d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20 5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg> <span class="sr-only">rss</span> </a> </li> </ul> </div> <span class="!my-4 text-accent" aria-hidden>---</span> <p>  </p> <div class="pt-2 hidden md:block"> <span>Part of series: </span> <br> <ul> <li><a class="cody-link" href="/series/tech">tech</a></li> </ul> </div> </div> <nav class="sticky top-20 order-2 hidden basis-64 lg:block"> <hr> <h2 class="font-bold text-lg">Table of Contents</h2> <ul class="-me-32" id="toc"> <li data-astro-cid-zekvapgs> <a href="#安装" id="toc-安装" data-astro-cid-zekvapgs> 安装 </a>  </li> <li data-astro-cid-zekvapgs> <a href="#nginx-命令行语法" id="toc-nginx-命令行语法" data-astro-cid-zekvapgs> nginx 命令行语法 </a>  </li> <li data-astro-cid-zekvapgs> <a href="#配置文件语法" id="toc-配置文件语法" data-astro-cid-zekvapgs> 配置文件语法 </a>  </li> <li data-astro-cid-zekvapgs> <a href="#反向代理" id="toc-反向代理" data-astro-cid-zekvapgs> 反向代理 </a> <ul class="ml-2" data-astro-cid-zekvapgs> <li data-astro-cid-zekvapgs> <a href="#配置二级域名反向代理" id="toc-配置二级域名反向代理" data-astro-cid-zekvapgs> 配置二级域名反向代理 </a> <ul class="ml-2" data-astro-cid-zekvapgs> <li data-astro-cid-zekvapgs> <a href="#server_name-使用" id="toc-server_name-使用" data-astro-cid-zekvapgs> server_name 使用 </a>  </li>  </ul> </li>  </ul> </li>  </ul> </nav>  </aside> </main> <footer class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pb-4 pt-20 text-center align-top font-semibold sm:flex-row sm:justify-between sm:text-xs text-textColor mb-8"> <div class="mr-2 sm:mr-0">
+Copyright &copy; 2024  Simon Y. </div> <nav aria-label="More on this site" class="gap-x-0 sm:gap-x-2 sm:flex sm:divide-x sm:divide-accent"> <a href="/" class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"> Home </a><a href="/blog" class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"> Blog </a><a href="/books" class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"> Books </a><a href="/archive" class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"> Archive </a><a href="/about" class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"> About </a> </nav> </footer>
+</html</body></html> 
